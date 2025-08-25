@@ -47,13 +47,19 @@ export const schemas = {
   }),
 
   createHabit: Joi.object({
-    title: Joi.string().min(1).max(255).required().messages({
-      'string.min': 'El título es requerido',
-      'string.max': 'El título no puede exceder 255 caracteres',
-      'any.required': 'El título es requerido'
+    name: Joi.string().min(1).max(255).required().messages({
+      'string.min': 'El nombre es requerido',
+      'string.max': 'El nombre no puede exceder 255 caracteres',
+      'any.required': 'El nombre es requerido'
     }),
-    description: Joi.string().max(1000).optional().messages({
-      'string.max': 'La descripción no puede exceder 1000 caracteres'
+    category: Joi.string().max(100).optional().messages({
+      'string.max': 'La categoría no puede exceder 100 caracteres'
+    }),
+    target_value: Joi.number().positive().optional().messages({
+      'number.positive': 'El valor objetivo debe ser positivo'
+    }),
+    unit: Joi.string().max(50).optional().messages({
+      'string.max': 'La unidad no puede exceder 50 caracteres'
     }),
     frequency: Joi.string().valid('daily', 'weekly', 'monthly').required().messages({
       'any.only': 'La frecuencia debe ser daily, weekly o monthly',
@@ -62,17 +68,23 @@ export const schemas = {
   }),
 
   updateHabit: Joi.object({
-    title: Joi.string().min(1).max(255).optional().messages({
-      'string.min': 'El título no puede estar vacío',
-      'string.max': 'El título no puede exceder 255 caracteres'
+    name: Joi.string().min(1).max(255).optional().messages({
+      'string.min': 'El nombre no puede estar vacío',
+      'string.max': 'El nombre no puede exceder 255 caracteres'
     }),
-    description: Joi.string().max(1000).optional().allow('').messages({
-      'string.max': 'La descripción no puede exceder 1000 caracteres'
+    category: Joi.string().max(100).optional().allow('').messages({
+      'string.max': 'La categoría no puede exceder 100 caracteres'
+    }),
+    target_value: Joi.number().positive().optional().allow(null).messages({
+      'number.positive': 'El valor objetivo debe ser positivo'
+    }),
+    unit: Joi.string().max(50).optional().allow('').messages({
+      'string.max': 'La unidad no puede exceder 50 caracteres'
     }),
     frequency: Joi.string().valid('daily', 'weekly', 'monthly').optional().messages({
       'any.only': 'La frecuencia debe ser daily, weekly o monthly'
     }),
-    isActive: Joi.boolean().optional()
+    active: Joi.boolean().optional()
   }),
 
   createHabitEntry: Joi.object({

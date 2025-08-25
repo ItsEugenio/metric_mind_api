@@ -11,13 +11,15 @@ export interface User {
 
 export interface Habit {
   id: number;
-  title: string;
-  description?: string;
+  name: string;
+  category?: string;
+  target_value?: number;
+  unit?: string;
   frequency: 'daily' | 'weekly' | 'monthly';
-  userId: number;
-  isActive: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  user_id: number;
+  active: boolean;
+  created_at: Date;
+  updated_at: Date;
 }
 
 export interface HabitEntry {
@@ -70,16 +72,20 @@ export interface LoginDto {
 }
 
 export interface CreateHabitDto {
-  title: string;
-  description?: string;
+  name: string;
+  category?: string;
+  target_value?: number;
+  unit?: string;
   frequency: 'daily' | 'weekly' | 'monthly';
 }
 
 export interface UpdateHabitDto {
-  title?: string;
-  description?: string;
+  name?: string;
+  category?: string;
+  target_value?: number;
+  unit?: string;
   frequency?: 'daily' | 'weekly' | 'monthly';
-  isActive?: boolean;
+  active?: boolean;
 }
 
 export interface CreateHabitEntryDto {
